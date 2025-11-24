@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: RM556612
+    password: 100505
+
+    hikari:
+      maximum-pool-size: 1
+      minimum-idle: 1
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        # pode até tirar essa linha, mas se quiser deixar não tem problema:
+        dialect: org.hibernate.dialect.OracleDialect
+
+  ai:
+    openai:
+      enabled: false
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
+
+springdoc:
+  api-docs.path: /api/v1/docs
+  swagger-ui.path: /api/v1/swagger
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
